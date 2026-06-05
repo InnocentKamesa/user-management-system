@@ -1,5 +1,5 @@
 import {useState} from "react";
-import FormField from "../components/form.fields";
+import {FormField} from "../components/form.fields.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage(){

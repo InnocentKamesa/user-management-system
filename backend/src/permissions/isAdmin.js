@@ -1,4 +1,4 @@
-import pool from '../config/db';
+import pool from '../config/db.config.js';
 
 export const isAdmin = async (req, res, next) => {
     const userId = req.user.id;
