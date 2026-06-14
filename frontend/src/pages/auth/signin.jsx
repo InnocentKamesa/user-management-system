@@ -15,6 +15,7 @@ if(!ENVIRONMENT || ENVIRONMENT === "development"){
 else{
   API_URL = import.meta.env.HOSTED_URL
 }
+console.log(API_URL);
 
 function SignIn() {
   const [loaded, setLoaded] = useState(false);
