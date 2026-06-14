@@ -8,6 +8,7 @@ import Spinner from "../../components/spinner.jsx";
 import AuthLayout from "../../layout/authLayout.jsx";
 
 const ENVIRONMENT = import.meta.env.ENVIRONMENT;
+console.log(ENVIRONMENT, "< Environment")
 let API_URL = "";
 if(!ENVIRONMENT || ENVIRONMENT === "development"){
   API_URL = import.meta.env.LOCAL_URL
