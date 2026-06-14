@@ -1,13 +1,27 @@
-import pg from "pg";
+import {Pool} from "pg";
+import dotenv from "dotenv";
 
-const { Pool } = pg;
+dotenv.config();
 
-const pool = new Pool({
-    user:"admin",
-    password:"admin",
-    host:"localhost",
-    port:5432,
-    database:"usermanagement"
-});
+let pool = "";
+
+const environment = process.env.ENVIRONMENT;
+if(!environment || environment === "development"){
+    pool = new Pool({
+        user: process.env.LOCAL_USER,
+        password: process.env.LOCAL_PASSWORD,
+        host: "localhost",
+        port: process.env.PORT,
+        database: process.env.LOCAL_DB_URL,
+    });
+}
+else {
+    pool = new Pool({
+        connectionString: process.env.HOSTED_DB_URL,
+        ssl: {
+        rejectUnauthorized: false
+    }
+    });
+}
 
 export default pool;

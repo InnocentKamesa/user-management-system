@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "server": "nodemon server.js",
+    "dev": "nodemon server.js",
     "build": ""
   },
   "keywords": [],

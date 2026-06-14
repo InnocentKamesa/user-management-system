@@ -1,4 +1,4 @@
-import {FormField}  from "../components/form.fields.jsx"; 
+import {FormField}  from "../../components/form.fields.jsx"; 
 import {useState} from "react";
 
 export default function ForgotPasswordPage(){

@@ -1,11 +1,11 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import SignInPage from "./features/auth/pages/signin";
-import SignUpPage from "./features/auth/pages/signup";
+import SignInPage from "./pages/auth/signin.jsx";
+import SignUpPage from "./pages/auth/signup.jsx";
 import "./index.css";
-import EmailSentPage from "./features/auth/pages/emailSentPage";
-import Dashboard from "./features/user/dashboard";
-import ForgotPasswordPage from "./features/auth/pages/forgotpassword";
-import ResetPasswordPage from "./features/auth/pages/resetpassword";
+import EmailSentPage from "./pages/auth/emailSentPage.jsx";
+import Dashboard from "./pages/user/dashboard.jsx";
+import ForgotPasswordPage from "./pages/auth/forgotpassword.jsx";
+import ResetPasswordPage from "./pages/auth/resetpassword.jsx";
 
 function App() {
   return (

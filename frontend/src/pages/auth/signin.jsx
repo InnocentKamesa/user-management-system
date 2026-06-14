@@ -1,16 +1,30 @@
-import "../../../index.css";
-import { useState } from "react";
-import { FormField, PasswordField } from "../components/form.fields.jsx";
+import "../../index.css";
+import { useState, useEffect } from "react";
+import { FormField, PasswordField } from "../../components/form.fields.jsx";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import Spinner from "../components/spinner.jsx";
+import Spinner from "../../components/spinner.jsx";
+import AuthLayout from "../../layout/authLayout.jsx";
 
-export default function SignInPage() {
+const ENVIRONMENT = import.meta.env.ENVIRONMENT;
+let API_URL = "";
+if(!ENVIRONMENT || ENVIRONMENT === "development"){
+  API_URL = import.meta.env.LOCAL_URL
+}
+else{
+  API_URL = import.meta.env.HOSTED_URL
+}
+
+function SignIn() {
+  const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
+
+  useEffect(()=>{setLoaded(true);}, []);
+
   const handleChange = (e) => {
     const new_form = {
       ...form,
@@ -22,7 +36,7 @@ export default function SignInPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:3000/auth/login/", {
+      const response = await fetch(`${API_URL}/auth/login/`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(form),
@@ -48,16 +62,12 @@ export default function SignInPage() {
   };
 
   return (
-    <div
-      className="w-screen h-screen flex bg-cover bg-center flex-col justify-center align-center"
-      style={{
-        backgroundImage: "url('/background.jpeg')",
-      }}
-    >
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div className="flex flex-col bg-gray-100 gap-4 w-[30%] mx-auto my-auto px-10 rounded-lg shadow-lg">
+  <div className="flex flex-col bg-gray-100 gap-4 w-full mx-auto my-auto px-10 rounded-lg shadow-lg">
+        {loading ? <Spinner /> : (
+          <div className={`transition-all duration-1000 ease-out ${loaded
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-6"}
+      `}>
           <h1 className="text-2xl font-extrabold my-10 mx-auto">
             Welcome back!
           </h1>
@@ -123,9 +133,15 @@ export default function SignInPage() {
               Sign Up
             </a>
           </div>
+          </div>
+            )}
         </div>
       )}
-      ;
-    </div>
-  );
+
+export default function SignInPage(){
+  return (
+    <AuthLayout>
+      <SignIn />
+    </AuthLayout>
+  )
 }
